@@ -1,17 +1,17 @@
-<editor
-apiKey="w4c6s7ywm35s2htp0hs6dln2871fipgg2njmx7av3atctdli"
-  [init]="{
-    height: 500,
-    menubar: false,
-    plugins: [
-      'advlist autolink lists link image charmap print preview anchor',
-      'searchreplace visualblocks code fullscreen',
-      'insertdatetime media table paste code help wordcount'
-    ],
-    toolbar:
-      'undo redo | formatselect | bold italic backcolor | \
-      alignleft aligncenter alignright alignjustify | \
-      bullist numlist outdent indent | removeformat | help'
-  }"
-></editor>
-<button>Submit</button>
+<button routerLink="/create">New blog</button>
+
+<div class="blog-list">
+
+  <h1>Blog List</h1>
+
+  <ul>
+    <li *ngFor="let blog of blogs">
+      <h2>{{ blog.title }}</h2>
+      <p>{{ blog.content }}</p>
+      <p><strong>Author: </strong>{{ blog.author }}</p>
+      <p><strong>Date: </strong>{{ blog.date }}</p>
+      <img [src]="blog.imageUrl" alt="Blog Image" class="blog-image">
+    </li>
+  </ul>
+
+</div>

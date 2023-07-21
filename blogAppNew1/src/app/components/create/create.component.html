@@ -1,0 +1,22 @@
+<input type="text" placeholder="Enter title" [(ngModel)]="title">
+<editor class="editor"
+  apiKey="w4c6s7ywm35s2htp0hs6dln2871fipgg2njmx7av3atctdli"
+  [(ngModel)]="editorContent"
+  [init]="{
+    height: 500,
+    menubar: false,
+    plugins: [
+      'advlist autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar:
+      'undo redo | formatselect | bold italic backcolor | \
+      alignleft aligncenter alignright alignjustify | \
+      bullist numlist outdent indent | removeformat | help'
+  }"
+></editor>
+<input type="text" placeholder="Enter description" [(ngModel)]="description">
+<input type="text" placeholder="Enter image URL" [(ngModel)]="imageUrl">
+<input type="text" placeholder="Tags" [(ngModel)]="tags">
+<button (click)="handleSubmit()">Submit</button>
