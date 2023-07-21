@@ -10,6 +10,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateComponent } from './components/create/create.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { NignUpComponent } from './components/sign-up/nign-up.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { AuthGuard } from './auth.guard'; // Import the AuthGuard
 
 
 @NgModule({
@@ -17,7 +20,9 @@ import { LandingComponent } from './components/landing/landing.component';
     AppComponent,
     BlogsComponent,
     CreateComponent,
-    LandingComponent
+    LandingComponent,
+    NignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,7 @@ import { LandingComponent } from './components/landing/landing.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
