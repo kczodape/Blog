@@ -12,7 +12,8 @@ import { CreateComponent } from './components/create/create.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { NignUpComponent } from './components/sign-up/nign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
-import { AuthGuard } from './auth.guard'; // Import the AuthGuard
+import { AuthGuard } from './auth.guard';
+import { ProfileComponent } from './components/profile/profile.component'; // Import the AuthGuard
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AuthGuard } from './auth.guard'; // Import the AuthGuard
     CreateComponent,
     LandingComponent,
     NignUpComponent,
-    SignInComponent
+    SignInComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

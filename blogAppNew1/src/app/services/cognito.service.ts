@@ -20,6 +20,12 @@ export class CognitoService {
     });
   }
 
+  getJwtToken(): Promise<string>{
+    return Auth.currentSession().then((session) =>{
+      return session.getIdToken().getJwtToken();
+    })
+  }
+
   confirmSignup(user: IUser): Promise<any> {
     return Auth.confirmSignUp(user.email, user.code);
   }
@@ -30,7 +36,7 @@ export class CognitoService {
   }
 
   getUser():Promise<any>{
-    return Auth.currentUserInfo();
+    return Auth.currentAuthenticatedUser();
   }
 
   updateUser(user:IUser):Promise<any>{

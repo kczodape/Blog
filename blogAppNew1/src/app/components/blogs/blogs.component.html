@@ -1,48 +1,53 @@
-<button routerLink="/create">New blog</button>
-<div *ngIf="isAuthenticated!=true">
-  <button (click)="signOut()" >LogOut</button>
+<div class="nav">
+  <span routerLink="/" class="pointer" style="cursor: pointer;">
+    <div class="twelve">
+      <h1>Blogoos</h1>
+    </div></span>
+  <div class="btns">
+    <button class="button login" routerLink="/sign-in" *ngIf="!isAuthenticated">
+      <svg
+        class="svg-icon"
+        fill="none"
+        height="20"
+        viewBox="0 0 20 20"
+        width="20"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+          clip-rule="evenodd"
+          d="m9.99998 4.16667c1.38072 0 2.50002 1.11929 2.50002 2.5 0 .85577-.4293 1.6115-1.088 2.06341l-.4536.31125.1079.53934 1.2505 6.25263h-4.63366l1.25051-6.25263.10791-.53934-.45358-.31125c-.65876-.45191-1.088-1.20764-1.088-2.06341 0-1.38071 1.11925-2.5 2.5-2.5zm-2.31684 11.66663-.19934.9968-.81715-.1634v-.8334zm5.65016.8334v-.8334h-1.0165l.1993.9968zm.8172-.1634.1993.9967h-1.0165-6.66665-1.0165l.19935-.9967 1.35023-6.75127c.14013.12727.28892.24506.44536.35237l.47144-.68715-.81716-.16342-.09964.4982c-.83832-.76139-1.36642-1.86163-1.36642-3.08536 0-2.30119 1.86549-4.16667 4.16667-4.16667 2.30112 0 4.16662 1.86548 4.16662 4.16667 0 1.22374-.5281 2.32399-1.3664 3.08538l-.0996-.49822-.8172.16342-.4714-.68717.4714.68717-.8171.16342.8171-.16342.4715.68715c.1564-.1073.3052-.22509.4453-.35235z"
+          fill="#fff"
+          fill-rule="evenodd"></path>
+      </svg>
+      <span class="lable">Login</span>
+    </button>
+    <button class="signup" *ngIf="!isAuthenticated" routerLink="/sign-up">
+      Sign up
+      <div class="arrow-wrapper">
+        <div class="arrow"></div>
+      </div>
+    </button>
+    <button routerLink="/create">New blog</button>
+    <button routerLink="/profile">Profile</button>
+    <button (click)="signOut()" *ngIf="isAuthenticated">LogOut</button>
+  </div>
 </div>
-<div *ngIf="!isAuthenticated">
-  <button routerLink="/sign-in">Login</button>
-</div>
+
 <br>
 <div class="blog-list">
-  
+
   <h1>Blog List</h1>
 
   <ul>
     <li *ngFor="let blog of blogs">
+      <img [src]="blog.image_url || 'assets/no_img.jpg'" alt="Blog Image" class="blog-image">
       <h2>{{ blog.title }}</h2>
       <p>{{ blog.content }}</p>
-      <p><strong>Author: </strong>{{ blog.author }}</p>
-      <p><strong>Date: </strong>{{ blog.date }}</p>
-      <img [src]="blog.imageUrl" alt="Blog Image" class="blog-image">
+      <p>{{ blog.description}}</p>
+      <p><strong>Author: </strong>{{ blog.username }}</p>
+      <p><strong>Tags: </strong>{{ blog.tags }}</p>
     </li>
-  </ul>
+  </ul>
+
 
 </div>
 
-<div class="row justify-content-center my-5">
-  <div class="col-4">
-    <div class="row">
-      <div class="col mb-2">
-        <label for="email" class="form-label">Email:</label>
-        <input type="email" id="email" name="email" #email="ngModel" [ngModel]="user.email" disabled class="form-control form-control-sm">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col mb-2">
-        <label for="name" class="form-label">Name:</label>
-        <input type="text" id="name" name="name" #name="ngModel" [(ngModel)]="user.name" class="form-control form-control-sm">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col d-grid">
-        <button type="button" (click)="update()" class="btn btn-sm btn-dark">
-          Update
-        </button>
-      </div>
-    </div>
-
-  </div>
-</div>

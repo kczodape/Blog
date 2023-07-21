@@ -6,13 +6,15 @@ import { LandingComponent } from './components/landing/landing.component';
 import { NignUpComponent } from './components/sign-up/nign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthGuard } from './auth.guard'; // Import the AuthGuard
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path:'', component:LandingComponent},
   {path:'blog', component:BlogsComponent},
   {path:'create', component:CreateComponent, canActivate: [AuthGuard]},
   {path:'sign-up', component:NignUpComponent},
-  {path:'sign-in', component:SignInComponent}
+  {path:'sign-in', component:SignInComponent},
+  {path:'profile', component:ProfileComponent}
 ];
 
 @NgModule({

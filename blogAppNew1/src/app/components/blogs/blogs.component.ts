@@ -13,24 +13,24 @@ import { CognitoService } from 'src/app/services/cognito.service';
 export class BlogsComponent implements OnInit {
   user: IUser = {} as IUser;
   blogs: any[] = [];
-  isAuthenticated: boolean = false;
+  isAuthenticated: boolean = false; // Add this property
 
   constructor(private blogService: BlogService, private cognitoService: CognitoService, private router:Router) {}
 
   ngOnInit() {
     this.fetchBlogs();
 
-    Hub.listen('auth', ({payload}) => {
-      if(payload.event === 'signIn'){
-        this.isAuthenticated = true;
-      }else if(payload.event === 'signOut'){
-        this.isAuthenticated = false
-      }
-    })
     this.cognitoService.getUser().then((user)=>{
       this.user = user.attributes;
-      this.isAuthenticated = user?.signInUserSession?.isValid() || false;
-    })
+      this.checkAuthentication(); // Check the initial authentication status
+    });
+
+    // Use 'Hub' to listen for authentication events
+    Hub.listen('auth', ({ payload }) => {
+      if (payload.event === 'signIn' || payload.event === 'signOut') {
+        this.checkAuthentication(); // Update the authentication status
+      }
+    });
   }
 
   fetchBlogs() {
@@ -45,13 +45,13 @@ export class BlogsComponent implements OnInit {
     );
   }
 
-  update():void{
-    this.cognitoService.updateUser(this.user).then(()=>{
-      alert("Updated successfully")
-    }).catch((error)=>{
-      alert(error)
-    })
-  }
+  // update():void{
+  //   this.cognitoService.updateUser(this.user).then(()=>{
+  //     alert("Updated successfully")
+  //   }).catch((error)=>{
+  //     alert(error)
+  //   })
+  // }
 
   public signOut():void{
     this.cognitoService.signOut().then(()=>{
@@ -59,5 +59,15 @@ export class BlogsComponent implements OnInit {
     }).catch((error)=>{
       alert(error);
     })
+  }
+
+  private checkAuthentication(): void {
+    Auth.currentAuthenticatedUser()
+      .then(() => {
+        this.isAuthenticated = true;
+      })
+      .catch(() => {
+        this.isAuthenticated = false;
+      });
   }
 }
