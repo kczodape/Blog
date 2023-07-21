@@ -45,6 +45,7 @@
       <p>{{ blog.description}}</p>
       <p><strong>Author: </strong>{{ blog.username }}</p>
       <p><strong>Tags: </strong>{{ blog.tags }}</p>
+      <button (click)="deleteBlog(blog.id)">Delete</button>
     </li>
   </ul>
 

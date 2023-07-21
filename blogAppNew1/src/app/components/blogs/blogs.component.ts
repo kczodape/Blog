@@ -70,4 +70,19 @@ export class BlogsComponent implements OnInit {
         this.isAuthenticated = false;
       });
   }
+
+  deleteBlog(blogId: string) {
+    this.cognitoService.getJwtToken().then((jwtToken) => {
+      this.blogService.deleteBlog(blogId, jwtToken).subscribe(
+        () => {
+          // Blog deleted successfully, refresh the blog list
+          this.fetchBlogs();
+        },
+        (error) => {
+          alert('You are not authenticated person to delete it')
+          console.error('Error deleting the blog:', error);
+        }
+      );
+    });
+  }
 }
